@@ -6,7 +6,7 @@ touch /home/bkp/.ssh/authorized_keys
 
 if [ -z "$KEYS" ]
 then
-    echo "Please define the $KEYS environment variable"
+    echo "Please define the \$KEYS environment variable"
     echo "Example:"
     echo "ecdsa-sha2-nistp256 AAB45[...]DEQ3="
     echo "ssh-rsa EOD4353[...]9302="
@@ -23,4 +23,5 @@ echo "Generating host key"
 ssh-keygen -t rsa -f /home/bkp/ssh_host_rsa_key -N ''
 echo 
 echo "starting sshd"
-/usr/sbin/sshd -f /home/bkp/sshd_config -D
+/usr/sbin/sshd -f /home/bkp/sshd_config -D &
+while true; do  true; done
