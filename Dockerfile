@@ -1,14 +1,14 @@
-FROM debian:sid
+FROM alpine:3.9
 MAINTAINER Lars Bättig <me@l4rs.net>
 
-ARG USERID=2000
+ARG USERID=4001
+ARG GROUPID=4001
 
-# install openssh-server and borg
-RUN apt-get update && apt-get -y upgrade && \
-    apt-get -y install openssh-server borgbackup bash
+RUN apk add --no-cache openssh borgbackup bash
 
 # create user
-RUN  useradd -u ${USERID} -m -U bkp && \ 
+RUN  addgroup -g ${GROUPID} bkp && \
+        adduser -u ${USERID} -D -G bkp bkp && \ 
         mkdir -p /hom/bkp/.ssh && \
         mkdir -p /home/bkp/run/
 
@@ -25,4 +25,4 @@ EXPOSE 2222
 
 VOLUME ["/borg"]
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/home/bkp/entrypoint.sh"]

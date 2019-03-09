@@ -15,6 +15,7 @@ APP_NAME=$(shell basename $(CURDIR))
 help: ## This help.
 	@echo "Docker build environment for" $(APP_NAME):
 	@echo "  - Build image: make build (build current version image)"
+	@echo "  - Build and Test image: make build (build current version image)"
 	@echo "  - Latest image: make latest (tags image as latest)"
 	@echo "  - Push image: make push (push without latest)"
 	@echo "  - Push latest image: make push-latest (publish latest)"
@@ -31,6 +32,9 @@ build:
 
 run:
 	tests/run.sh $(REPO)/$(APP_NAME):$(VERSION) 
+
+
+test: build run
 
 push:
 	docker push $(REPO)/$(APP_NAME):$(VERSION)

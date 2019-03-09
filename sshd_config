@@ -3,13 +3,10 @@ AddressFamily any
 ListenAddress 0.0.0.0
 ListenAddress ::
 HostKey /home/bkp/ssh_host_rsa_key
-UsePrivilegeSeparation no
 PidFile /home/bkp/run/sshd.pid
 PasswordAuthentication no
 PermitEmptyPasswords no
 ChallengeResponseAuthentication no
-UsePAM yes
-
 AllowAgentForwarding no
 AllowTcpForwarding no
 GatewayPorts no
